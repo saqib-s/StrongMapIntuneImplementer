@@ -107,7 +107,7 @@ try {
 
 # Confirm devices can be queried, else exit
 try {
-    Get-MgDevice | Out-Null
+    Get-MgDevice -ErrorAction Stop  | Out-Null
 } catch {
     Write-Host "`nCannot fetch devices list from Azure AD - do you have the correct app permission set? Exiting script..." -ForegroundColor Red
     exit(1)
@@ -115,7 +115,7 @@ try {
 
 # Confirm groups can be queried, else exit
 try {
-    Get-MgGroup | Out-Null
+    Get-MgGroup -ErrorAction Stop  | Out-Null
 } catch {
     Write-Host "`nCannot fetch groups list from Azure AD - do you have the correct app permission set? Exiting script..." -ForegroundColor Red
     exit(1)
