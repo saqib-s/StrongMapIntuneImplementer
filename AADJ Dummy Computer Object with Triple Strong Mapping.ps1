@@ -284,7 +284,7 @@ foreach ($device in $(Get-MgDevice -Filter "trustType eq 'AzureAD'" -All <#| whe
         } else {
             # Computer must not exist, create new and set attributes
             $adDevice = New-ADComputer -Name $guid -DNSHostName $guid -ServicePrincipalNames "host/$($guid)" -SAMAccountName $sAMAccountName -Description "$($device.DisplayName)" -Path $orgUnit -AccountPassword $NULL -PasswordNotRequired $False -PassThru
-            $adDevice | set-ADComputer -Replace @{AltSecurityIdentities = $altSecurityIdentities}
+            $adDevice | set-ADComputer -Replace @{AltSecurityIdentities = $allAltSecIDarray}
         }
         # Get the computer object attributes fresh after create/update operations for future use
         $adDevice = Get-ADComputer -Filter "Name -eq `"$($guid)`"" -SearchBase $orgUnit
